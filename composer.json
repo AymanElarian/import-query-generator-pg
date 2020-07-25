@@ -1,5 +1,5 @@
 {
-    "name": "AymanElarian/import-query-generator-pg",
+    "name": "aymanelarian/import-query-generator-pg",
     "description": "An efficient Postgres query generator for mass resource import, distinguishing between new records and records to update.",
     "type": "library",
     "license": "MIT",
