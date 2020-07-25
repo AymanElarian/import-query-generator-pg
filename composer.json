@@ -1,12 +1,12 @@
 {
-    "name": "kfirba/import-query-generator",
-    "description": "An efficient query generator for mass resource import, distinguishing between new records and records to update.",
+    "name": "AymanElarian/import-query-generator-pg",
+    "description": "An efficient Postgres query generator for mass resource import, distinguishing between new records and records to update.",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Kfir Bens-Ami",
-            "email": "kfirba2@gmail.com"
+            "name": "Ayman Elarian",
+            "email": "ayman@aymax.com"
         }
     ],
     "require": {},
