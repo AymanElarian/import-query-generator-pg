@@ -1,7 +1,7 @@
 <?php
 
-use Kfirba\QueryObject;
-use Kfirba\QueryGenerator;
+use AymanElarian\QueryObject;
+use AymanElarian\QueryGenerator;
 use PHPUnit\Framework\TestCase;
 
 class QueryGeneratorTest extends TestCase
