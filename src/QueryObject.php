@@ -1,6 +1,6 @@
 <?php
 
-namespace Kfirba;
+namespace AymanElarian;
 
 class QueryObject
 {
