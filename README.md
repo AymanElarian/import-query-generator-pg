@@ -1,6 +1,8 @@
 # Import Query Generator
 
-An efficient query generator for mass resource import, **distinguishing between new records and records to update**. This library uses MySQL's `ON DUPLICATE KEY UPDATE` feature.
+An efficient query generator for mass resource import, **distinguishing between new records and records to update**. This library uses Postgree's `ON CONFLICT DO UPDATE` feature.
+
+its forked from [kfirba/import-query-generator](https://github.com/kfirba/import-query-generator) and adjusted for postgree sql.
 
 ## Preface
 
@@ -11,13 +13,13 @@ I highly recommend you at least skim through [my blog about this library](https:
 You can add this library as a local, per-project dependency to your project using [Composer](https://getcomposer.org/):
 
 ```bash
-composer require kfirba/import-query-generator
+composer require AymanElarian/import-query-generator-pg
 ```
 
 ## Usage
 
 ```php
-use Kfirba\QueryGenerator;
+use AymanElarian\QueryGenerator;
 
 $table = 'users';
 $data = [
