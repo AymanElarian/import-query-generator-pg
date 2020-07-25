@@ -1,6 +1,6 @@
 <?php
 
-namespace Kfirba;
+namespace AymanElarian;
 
 class QueryGenerator
 {
@@ -13,15 +13,15 @@ class QueryGenerator
      *
      * @return QueryObject
      */
-    public function generate($table, $rows, array $exclude = [])
+    public function generate($table, $key, $rows, array $exclude = [])
     {
         $columns = array_keys($rows[0]);
-        $columnsString = implode('`,`', $columns);
+        $columnsString = implode(',', $columns);
         $values = $this->buildSQLValuesStringFrom($rows);
         $updates = $this->buildSQLUpdatesStringFrom($columns, $exclude);
 
-        $query = vsprintf('insert into `%s` (`%s`) values %s on duplicate key update %s', [
-            $table, $columnsString, $values, $updates,
+        $query = vsprintf('INSERT INTO  %s (%s) values %s ON CONFLICT (%s) DO UPDATE SET %s', [
+            $table, $columnsString, $values, $key, $updates,
         ]);
 
         return new QueryObject($query, $this->extractBindingsFrom($rows));
@@ -37,7 +37,20 @@ class QueryGenerator
     protected function buildSQLValuesStringFrom($rows)
     {
         return rtrim(array_reduce($rows, function ($values, $row) {
-            return $values . '(' . rtrim(str_repeat('?,', count($row)), ',') . '),';
+
+            $array = array_values($row);
+            /*
+            foreach ($array as &$value) {
+             
+                $valueString = is_string($value) ? "'$value'" : $value;
+                $value = ($valueString=='' || $valueString==NULL) ? "'$value'": $valueString;
+                
+            
+            }
+            */
+
+
+            return $values . '(' . implode(",", $array) . '),';
         }, ''), ',');
     }
 
@@ -52,9 +65,9 @@ class QueryGenerator
     protected function buildSQLUpdatesStringFrom($rows, $exclude)
     {
         return trim(array_reduce(array_filter($rows, function ($column) use ($exclude) {
-            return ! in_array($column, $exclude);
+            return !in_array($column, $exclude);
         }), function ($updates, $column) {
-            return $updates . "`{$column}`=VALUES(`{$column}`),";
+            return $updates . "{$column}=EXCLUDED.{$column},";
         }, ''), ',');
     }
 
